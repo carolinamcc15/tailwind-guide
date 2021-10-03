@@ -1,0 +1,419 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Tailwind CSS</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="tailwind-pw"
+                  title="Tailwind CSS"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Introducción a Tailwind CSS" duration="3">
+        <p class="image-container"><img alt="Logo de Tailwind CSS" src="img\\5c19ec666abcc782.png"></p>
+<h2 is-upgraded>¿Qué es?</h2>
+<p>Tailwind es un framework de CSS que brinda una gran variedad de clases predefinidas para dar estilo a los elementos que integran un documento HTML. Estas clases representan propiedades de CSS de una manera sencilla y fácil de utilizar, además de que permiten un diseño responsive.</p>
+<h2 is-upgraded>¿Por qué Tailwind?</h2>
+<ul>
+<li>Es altamente customizable.</li>
+<li>Los nombres de las clases son fáciles de recordar y siguen un mismo patrón.</li>
+<li>Permite crear sitios web responsive sin mucha complicación.</li>
+<li>No utiliza componentes predefinidos (principal diferencia con frameworks como Bootstrap).</li>
+<li>Su <a href="https://tailwindcss.com/docs/background-color" target="_blank">documentación</a> permite encontrar los elementos de manera rápida y es amigable al usuario.</li>
+</ul>
+<h2 is-upgraded>¿Qué se aprenderá en este Codelab?</h2>
+<ul>
+<li>Instalación de Tailwind.</li>
+<li>Sintaxis de clases.</li>
+<li>Cómo utilizar Tailwind por medio de ejemplos prácticos.</li>
+<li>Personalización de clases y propiedades.</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Instalación de Tailwind en una app de React" duration="10">
+        <aside class="warning"><p>Asegúrate de tener instalado react y create-react-app</p>
+</aside>
+<h2 is-upgraded>Crear nuevo proyecto</h2>
+<p>Crea un proyecto de React utilizando create-react-app y realiza las siguientes instalaciones dentro del proyecto:</p>
+<h2 is-upgraded>Instalar dependencias</h2>
+<pre><code>npm install -D tailwindcss@npm:@tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9
+</code></pre>
+<pre><code>npm install @craco/craco
+</code></pre>
+<h2 is-upgraded>Actualizar scripts</h2>
+<p>Actualiza los scripts en el archivo package.json de tu proyecto.</p>
+<pre><code>&#34;scripts&#34;: {
+    &#34;start&#34;: &#34;craco start&#34;,
+    &#34;build&#34;: &#34;craco build&#34;,
+    &#34;test&#34;: &#34;craco test&#34;,
+    &#34;eject&#34;: &#34;react-scripts eject&#34; //Este permanece igual
+  },
+</code></pre>
+<h2 is-upgraded>Archivos de configuración</h2>
+<p>Crea un archivo llamado craco.config.js con el siguiente fragmento de código, donde se especifican los plugins de PostCSS (herramienta que transforma el código CSS utilizando plugins de JavaScript).</p>
+<pre><code>module.exports = {
+  style: {
+    postcss: {
+      plugins: [
+        require(&#39;tailwindcss&#39;),
+        require(&#39;autoprefixer&#39;),
+      ],
+    },
+  },
+}
+</code></pre>
+<p>También es necesario crear un archivo de configuración de Tailwind utilizando el comando:</p>
+<pre><code>npx tailwindcss-cli@latest init
+</code></pre>
+<p>Una vez creado, notarás que tiene el nombre de tailwind.config.js. Modifica la opción &#34;purge&#34; de este archivo agregando todas las rutas de los componentes del proyecto para eliminar el código que no se utiliza en producción:</p>
+<pre><code>module.exports = {
+   purge: [&#39;./src/**/*.{js,jsx,ts,tsx}&#39;, &#39;./public/index.html&#39;], //en esta línea
+    darkMode: false, // or &#39;media&#39; or &#39;class&#39;
+    theme: {
+      extend: {},
+    },
+    variants: {
+      extend: {},
+    },
+    plugins: [],
+  }
+</code></pre>
+<h2 is-upgraded>Incluir estilos en CSS</h2>
+<p>Para poder utilizar las clases de Tailwind en el archivo .css se debe colocar @tailwind seguido de los estilos que nos brinda esta herramienta, tal y como se muestra a continuación:</p>
+<pre><code>@tailwind base;
+@tailwind components;
+@tailwind utilities;
+</code></pre>
+<h2 is-upgraded>¡Y listo!</h2>
+<p>Ya tienes configurado el entorno para utilizar Tailwind dentro de tu aplicación de React. Continuemos a la siguiente sección💯.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Sintaxis de clases" duration="3">
+        <ul>
+<li>Las clases de Tailwind siguen una convención lowercase, por ejemplo: <code>bg-color-yellow-500</code>.</li>
+<li>Al utilizar Tailwind en un proyecto de React, cada clase se coloca en el atributo className del elemento HTML en cuestión, como se muestra en el ejemplo:</li>
+</ul>
+<pre><code>&lt;h1 className=&#39;text-gray-700 font-bold text-center text-xl&#39;&gt;Hello World!&lt;/h1&gt;
+</code></pre>
+<p>En este caso, al h1 se le está aplicando lo siguiente:</p>
+<ol type="1">
+<li><code>text-gray-700</code>: Color de texto gris con variante 700.</li>
+<li><code>text-center</code>: Alineado al centro.</li>
+<li><code>font-bold</code>: Grosor de la fuente (o weight) negrita.</li>
+<li><code>text-xl</code>: Tamaño de fuente extra grande.</li>
+</ol>
+<p>Como puedes observar, las clases de Tailwind son autoexplicativas, por lo que podemos familiarizarnos con ellas muy fácilmente.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Ejemplos prácticos" duration="3">
+        <aside class="special"><p>Si dejaste la instalación para después, también puedes practicar en  <a href="https://play.tailwindcss.com/" target="_blank">Tailwind playground</a></p>
+</aside>
+<h2 is-upgraded>Aclaraciones</h2>
+<ul>
+<li>Antes de empezar, te recomendamos instalar la extensión <a href="https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss" target="_blank">Tailwind CSS IntelliSense</a> para Visual Studio Code, ya que brinda sugerencias, autocomplementa las clases y muestra información sobre la verdadera propiedad CSS que se le aplica al elemento.</li>
+<li>También asegúrate de borrar el fragmento de código JSX que se encuentra dentro del div con clase &#34;App&#34; en App.js, ya que no lo utilizaremos. Quedaría de la siguiente manera:</li>
+</ul>
+<pre><code>function App() {
+  return (
+    &lt;div className=&#34;App&#34;&gt;
+      
+    &lt;/div&gt;
+  );
+}
+
+export default App;
+</code></pre>
+<p>Ahora sí, comencemos ✅</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Ejemplo 1: Estilo de un botón" duration="10">
+        <p class="image-container"><img alt="Hover Me Button" src="img\\43ac884ec5f23ee4.gif"></p>
+<p>¿Tienes alguna idea de cómo lograrlo utilizando CSS?</p>
+<p>Piénsalo un poco y veamos cómo hacerlo utilizando Tailwind👀, sigue los pasos para que puedas observar cada cambio en tu navegador.</p>
+<aside class="warning"><p>Recuerda ejecutar el comando `npm start` para compilar e iniciar la aplicación.</p>
+</aside>
+<h2 is-upgraded>Creación del botón</h2>
+<p>Añade el elemento button al componente App.</p>
+<pre><code>function App() {
+  return (
+    &lt;div className=&#34;App&#34;&gt;
+        &lt;button&gt;Hover me!&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+<h2 is-upgraded>Posicionamiento</h2>
+<p>Para que el botón se muestre al centro, haremos uso del posicionamiento con flex en el contenedor principal App.</p>
+<p>En CSS se vería de la siguiente manera:</p>
+<pre><code>div.App {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</code></pre>
+<p>Mientras que utilizando el framework Tailwind se logra simplemente colocando las clases (en el mismo orden):</p>
+<pre><code>function App() {
+  return (
+    &lt;div className=&#34;App w-screen h-screen flex justify-center items-center&#34;&gt;
+        &lt;button&gt;Hover me!&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+<p>📌 Ten en cuenta que para representar la propiedad width se utiliza <strong>w-{valor}</strong> y para height <strong>h-{valor}</strong>.</p>
+<h2 is-upgraded>Estilos</h2>
+<p>Ahora sigamos con el estilo del botón como tal. Seguramente la solución que pensaste en CSS es algo parecida a la siguiente:</p>
+<pre><code>button {
+  padding: 0.5rem 1.5rem; /*Recuerda: 0.5rem arriba - abajo y 1.5rem izquierda - derecha*/
+  border-radius: 0.375rem;
+  background-color: rgb(153, 27, 27);
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+}
+
+button:hover {
+  background-color: rgb(220, 38, 38);
+}
+</code></pre>
+<p>Teniéndolo en cuenta, coloquemos las clases de Tailwind correspondientes al elemento en el mismo orden:</p>
+<pre><code>function App() {
+  return (
+    &lt;div className=&#34;App w-screen h-screen flex justify-center items-center&#34;&gt;
+        &lt;button className=&#34;py-2 px-6 rounded-md bg-red-800 text-white font-semibold hover:bg-red-600&#34;&gt;Hover me!&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+<aside class="special"><p>Si quieres utilizar otros colores, puedes encontrarlos en el siguiente  <a href="https://tailwindcss.com/docs/background-color" target="_blank">enlace</a>.  En secciones posteriores aprenderás cómo utilizar colores personalizados🎨. </p>
+</aside>
+<p>📌 Es importante mencionar que los valores colocados en las clases py-2 y px-6 corresponden a medidas predefinidas. Estas pueden estar en rem o en px en su mayoría, a excepción de algunas donde se utilizan unidades porcentuales, vw y vh (width y height).</p>
+<p>✨ Para mejor comprensión, visita la <a href="https://tailwindcss.com/docs/padding" target="_blank">documentación oficial de Tailwind</a>.</p>
+<h2 is-upgraded>Resumen de sección</h2>
+<table>
+<tr><td colspan="1" rowspan="1"><p><strong>CSS</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>Tailwind</strong></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>width: 100vw;</p>
+</td><td colspan="1" rowspan="1"><p>w-screen</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>height: 100vh;</p>
+</td><td colspan="1" rowspan="1"><p>h-screen</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>display: flex;</p>
+</td><td colspan="1" rowspan="1"><p>flex</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>justify-content: center;</p>
+</td><td colspan="1" rowspan="1"><p>justify-center</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>align-items: center;</p>
+</td><td colspan="1" rowspan="1"><p>items-center</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>padding-left: 1.5rem;<br>padding-right: 1.5rem;</p>
+</td><td colspan="1" rowspan="1"><p>px-{valor}</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>padding-top: 0.5rem;<br>padding-bottom: 0.5rem;</p>
+</td><td colspan="1" rowspan="1"><p>py-{valor}</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>border-radius: 0.375rem;</p>
+</td><td colspan="1" rowspan="1"><p>rounded-md</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>background-color: #color;</p>
+</td><td colspan="1" rowspan="1"><p>bg-color-variante</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>color: #color;</p>
+</td><td colspan="1" rowspan="1"><p>text-color-variante</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>font-weight: 600;</p>
+</td><td colspan="1" rowspan="1"><p>font-semibold</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>button:hover { <br>  property: value;<br>}</p>
+</td><td colspan="1" rowspan="1"><p>hover:clase</p>
+</td></tr>
+</table>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Ejemplo 2: Tarjetas responsive" duration="20">
+        <p class="image-container"><img alt="Responsive cards" src="img\\2ebfce7a3bba835c.gif"></p>
+<p>✨ Las imágenes fueron extraídas del siguiente <a href="https://medium.muz.li/top-7-illustration-trends-2021-e09546f17630" target="_blank">sitio web</a>, pero puedes utilizar las que tú quieras.</p>
+<h2 is-upgraded>Contenedor y título</h2>
+<p>Antes de realizar las tarjetas, colocaremos cierto padding al contenedor principal (de clase App) y crearemos el título de nuestro sitio con su estilo.</p>
+<pre><code>function App() {
+  return (
+    &lt;div className=&#34;App p-10&#34;&gt;
+      &lt;h1 className=&#34;mb-12 text-2xl font-bold text-gray-800&#34;&gt;Tarjetas responsive con Tailwind&lt;/h1&gt;
+    &lt;/div&gt;
+  );
+}
+
+</code></pre>
+<p>📌 Cuando se utiliza solamente <code>p-{valor}</code> para el padding (no <code>px-{valor}</code> o <code>py-{valor}</code> como en el ejemplo anterior), significa que se le aplicará el mismo valor arriba, a la derecha, abajo y a la izquierda.</p>
+<p>📌 La clase <code>mb-{valor}</code> representa la propiedad de CSS margin-bottom. Por lo que, siguiendo la misma lógica, se tiene <code>mt-{valor}</code> para margin-top; <code>ml-{valor}</code> para margin-left y <code>mr-{valor}</code> para margin-right.</p>
+<h2 is-upgraded>Estructura de sección y tarjetas</h2>
+<p>Primero, crearemos la sección que contendrá las tarjetas:</p>
+<pre><code>    &lt;div className=&#34;App p-10&#34;&gt;
+      &lt;h1 className=&#34;font-bold text-2xl mb-12 text-gray-800&#34;&gt;Tarjetas responsive con Tailwind&lt;/h1&gt;
+      &lt;section&gt;
+
+      &lt;/section&gt;
+    &lt;/div&gt;
+</code></pre>
+<p>Y dentro de la sección, colocaremos el código JSX para <strong>una</strong> tarjeta:</p>
+<pre><code>    &lt;section&gt;
+      &lt;article&gt;
+        &lt;img src={cats} alt=&#34;Descripción de tu imagen&#34; /&gt;
+        &lt;div&gt;
+          &lt;h2&gt;Some title&lt;/h2&gt;
+          &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla rhoncus mauris vitae lobortis accumsan. Proin ultrices fringilla aliquet. Aenean eget velit quam.&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+          &lt;p&gt;Example&lt;/p&gt;
+          &lt;button&gt;Button&lt;/button&gt;
+          &lt;/div&gt;
+      &lt;/article&gt;
+    &lt;/section&gt;
+</code></pre>
+<p>Para visualizar de mejor manera el posicionamiento, puedes agregar las que creas necesarias por el momento.</p>
+<p>📌 Recuerda que debes importar las imágenes en las primeras líneas del código, como se muestra a continuación (las rutas varían dependiendo de la estructura de tu proyecto):</p>
+<pre><code>import cats from &#39;./assets/img/cats.png&#39;;
+import garden from &#39;./assets/img/garden.png&#39;;
+</code></pre>
+<h2 is-upgraded>Estilo y posicionamiento de sección</h2>
+<p>Para la sección se utilizará posicionamiento con grid, pero antes es necesario comprender cómo crear variantes de nuestros estilos dependiendo del tamaño del dispositivo.</p>
+<p>Tailwind cuenta con <strong>breakpoints predefinidos</strong> para poder trabajar directamente con ellos y si observas en la tabla, cada uno corresponde a una media query de CSS, esto es lo que permite la adaptabilidad del sitio web.</p>
+<p class="image-container"><img alt="Responsive" src="img\\e68a55b0e5a463d0.png"></p>
+<p>✨ Para más información, visita la <a href="https://tailwindcss.com/docs/responsive-design" target="_blank">sección de diseño responsive de Tailwind</a>.</p>
+<p>Sabiendo esto, apliquémoslo a la sección de tarjetas.</p>
+<aside class="warning"><p>Ten en cuenta que primero se deben aplicar los estilos para dispositivos móviles y luego ir agregando las variantes para dispositivos de mayor tamaño. </p>
+</aside>
+<p>Para este ejemplo se tienen las siguientes consideraciones para las tarjetas:</p>
+<ul>
+<li>En dispositivos pequeños se muestran en una columna.</li>
+<li>En dispositivos medianos se muestran en dos columnas.</li>
+<li>En dispositivos grandes se muestran en tres columnas.</li>
+</ul>
+<p>Para esto, el contenedor de las tarjetas debería tener las siguientes clases:</p>
+<pre><code>&lt;section className=&#34;grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10&#34;&gt;
+</code></pre>
+<p>O en otras palabras (verifica en la tabla):</p>
+<ul>
+<li><code>grid-cols-1</code> se aplicará en resoluciones menores a 768px (md).</li>
+<li><code>md:grid-cols-2</code> se aplicará en resoluciones mayores o iguales a 768px (md) y menores a 1024px (lg).</li>
+<li><code>lg:grid-cols-3</code> se aplicará en resoluciones mayores a o iguales 1024px (lg).</li>
+</ul>
+<p>📌 La propiedad <code>gap-{valor}</code> se utiliza para dar espaciado entre los elementos del grid.</p>
+<p>Si agregaste más de una tarjeta, verifica en la opción inspeccionar del navegador que estas se adaptan a medida se cambia la resolución.</p>
+<h2 is-upgraded>Estilo de tarjetas</h2>
+<p>Ahora que ya tenemos listo nuestro contenedor, le daremos estilo a las tarjetas. En este caso, como todas son iguales, a excepción de los colores e imágenes, se le puede aplicar solamente a una de ellas y luego copiar el mismo código para las demás.</p>
+<p>Retomemos el diseño y el código utilizado para una tarjeta:</p>
+<p class="image-container"><img alt="Responsive cards" src="img\\c56bf60214c66dea.png"></p>
+<pre><code>    &lt;article&gt;
+      &lt;img src={cats} alt=&#34;Descripción de tu imagen&#34; /&gt;
+      &lt;div&gt;
+        &lt;h2&gt;Some title&lt;/h2&gt;
+        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla rhoncus mauris vitae lobortis accumsan. Proin ultrices fringilla aliquet. Aenean eget velit quam.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;p&gt;Example&lt;/p&gt;
+        &lt;button&gt;Button&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/article&gt;
+</code></pre>
+<h3 is-upgraded>⭐ ¿Te animas a intentarlo por tu cuenta?</h3>
+<p>Puedes lograrlo con los elementos vistos en este Codelab y también con ayuda de la <a href="https://tailwindcss.com/docs" target="_blank">documentación de Tailwind</a>.</p>
+<p>Si aceptas el reto, detente en este apartado y revisa la solución cuando esté listo, por si hay elementos adicionales que no hayas considerado utilizar.</p>
+<p>¡Mucha suerte!✨</p>
+<h3 is-upgraded>Solución</h3>
+<pre><code>    &lt;article className=&#34;flex flex-col bg-purple-50 shadow-xl&#34;&gt;
+      &lt;img src={cats} alt=&#34;Gatos de colores&#34; /&gt;
+      &lt;div className=&#34;px-4&#34;&gt;
+        &lt;h2 className=&#34;my-4 font-semibold text-lg text-center&#34;&gt;Some title&lt;/h2&gt;
+        &lt;p className=&#34;text-center leading-6&#34;&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla rhoncus mauris vitae lobortis accumsan. Proin ultrices fringilla aliquet. Aenean eget velit quam.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div className=&#34;flex justify-between items-center mt-6 bg-purple-100&#34;&gt;
+        &lt;p className=&#34;pl-4 text-sm text-left&#34;&gt;Example&lt;/p&gt;
+        &lt;button className=&#34;py-3 px-2 w-1/3 md:w-1/4 self-center bg-purple-500 font-semibold text-white text-sm hover:bg-purple-600&#34;&gt;Button&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/article&gt;
+</code></pre>
+<p>📌 <code>flex-col</code> se utiliza para especificar que la dirección del contenedor flex será en forma de columna (propiedad de CSS <code>flex-direction: column;</code>).<br> 📌 <code>shadow-xl</code> se utilizó para que la tarjeta tuviera cierto efecto de sombra. También se pueden utilizar los tamaños sm, md, lg, entre otros.<br> 📌 La clase <code>leading-{valor}</code> se utiliza para dar interlineado en textos.<br> 📌 Como última aclaración, para el botón se utilizó <code>w-1/3</code> (0.33333% del ancho) para dispositivos menores a 768px y <code>w-1/4</code> (0.25% del ancho) para los de 768px en adelante. Esta es la forma de colocar unidades porcentuales.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Personalización de clases" duration="10">
+        <p>En la documentación de Tailwind se presentan diversas maneras de personalizar <a href="https://tailwindcss.com/docs/customizing-colors" target="_blank">colores</a>, <a href="https://tailwindcss.com/docs/customizing-spacing" target="_blank">espaciado y tamaño</a>, <a href="https://tailwindcss.com/docs/breakpoints" target="_blank">breakpoints</a> e incluso <a href="https://tailwindcss.com/docs/font-family#customizing" target="_blank">fuentes</a>. Te invito a revisar cada apartado e incluso los demás que se muestran para que tengas una idea de todas las ventajas de Tailwind.</p>
+<p>Generalmente, cuando se desean crear nuevas clases o cambiar los valores de las ya definidas, se realiza en el apartado <code>theme</code> dentro del archivo <strong>tailwind.config.js</strong>.</p>
+<p>Existen dos maneras de hacerlo: ✅ ✅</p>
+<pre><code>module.exports = {
+  purge: [&#39;./src/**/*.{js,jsx,ts,tsx}&#39;, &#39;./public/index.html&#39;],
+  darkMode: false, // or &#39;media&#39; or &#39;class&#39;
+  theme: {
+    //Aquí se cambian valores predefinidos por Tailwind
+    extend: {
+      //Aquí se agregan clases personalizadas
+    },
+  },
+  variants: {
+    extend: {},
+  },
+  plugins: [],
+}
+
+De 
+
+</code></pre>
+<h2 is-upgraded>Nuevas clases</h2>
+<p>📌 Recuerda que estas deben colocarse dentro de <code>extend</code>, ya que se tratan de estilos adicionales.</p>
+<h3 is-upgraded>Agrega tu color favorito</h3>
+<pre><code>theme: {
+    extend: {
+      colors: {
+        
+      }
+    },
+  },
+</code></pre>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

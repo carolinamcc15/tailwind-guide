@@ -1,0 +1,26 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2021-10-02T21:11:53-06:00",
+  "id": "tailwind-pw",
+  "duration": 59,
+  "title": "Tailwind CSS",
+  "summary": "Installation and some other features about Tailwind CSS.",
+  "source": "tailwind-pw.md",
+  "theme": "",
+  "status": [
+    "draft"
+  ],
+  "category": [
+    "css",
+    "tailwind"
+  ],
+  "tags": [
+    "guide",
+    "practice",
+    "web"
+  ],
+  "url": "tailwind-pw"
+}

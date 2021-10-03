@@ -30,16 +30,16 @@
       <google-codelab-step label="Introducción a Tailwind CSS" duration="3">
         <p class="image-container"><img alt="Logo de Tailwind CSS" src="img\\5c19ec666abcc782.png"></p>
 <h2 is-upgraded>¿Qué es?</h2>
-<p>Tailwind es un framework de CSS que brinda una gran variedad de clases predefinidas para dar estilo a los elementos que integran un documento HTML. Estas clases representan propiedades de CSS de una manera sencilla y fácil de utilizar, además de que permiten un diseño responsive.</p>
+<p>Tailwind es un framework de CSS que brinda una gran variedad de clases predefinidas para dar estilo a los elementos que integran un documento HTML. Estas clases representan propiedades de CSS de una manera sencilla y fácil de utilizar, además de que permiten crear diseños responsive.</p>
 <h2 is-upgraded>¿Por qué Tailwind?</h2>
 <ul>
-<li>Es altamente customizable.</li>
 <li>Los nombres de las clases son fáciles de recordar y siguen un mismo patrón.</li>
 <li>Permite crear sitios web responsive sin mucha complicación.</li>
 <li>No utiliza componentes predefinidos (principal diferencia con frameworks como Bootstrap).</li>
-<li>Su <a href="https://tailwindcss.com/docs/background-color" target="_blank">documentación</a> permite encontrar los elementos de manera rápida y es amigable al usuario.</li>
+<li>Es altamente customizable.</li>
+<li>Su <a href="https://tailwindcss.com/docs" target="_blank">documentación</a> permite encontrar los elementos de manera rápida y es amigable al usuario.</li>
 </ul>
-<h2 is-upgraded>¿Qué se aprenderá en este Codelab?</h2>
+<h2 is-upgraded>¿Qué aprenderás en este Codelab?</h2>
 <ul>
 <li>Instalación de Tailwind.</li>
 <li>Sintaxis de clases.</li>
@@ -53,15 +53,20 @@
       <google-codelab-step label="Instalación de Tailwind en una app de React" duration="10">
         <aside class="warning"><p>Asegúrate de tener instalado react y create-react-app</p>
 </aside>
-<h2 is-upgraded>Crear nuevo proyecto</h2>
-<p>Crea un proyecto de React utilizando create-react-app y realiza las siguientes instalaciones dentro del proyecto:</p>
-<h2 is-upgraded>Instalar dependencias</h2>
+<h2 is-upgraded>Creación de proyecto</h2>
+<p>Crea un proyecto de React y cambia tu ubicación a la carpeta del nuevo proyecto utilizando los comandos:</p>
+<pre><code>create-react-app app-name
+cd app-name
+</code></pre>
+<p>Ahora ejecuta el comando <code>code .</code> para abrir la aplicación con Visual Studio Code.</p>
+<h2 is-upgraded>Instalación de dependencias</h2>
+<p>Para poder utilizar Tailwind, es necesario realizar las siguientes instalaciones:</p>
 <pre><code>npm install -D tailwindcss@npm:@tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9
 </code></pre>
 <pre><code>npm install @craco/craco
 </code></pre>
-<h2 is-upgraded>Actualizar scripts</h2>
-<p>Actualiza los scripts en el archivo package.json de tu proyecto.</p>
+<h2 is-upgraded>Actualización de scripts</h2>
+<p>En el archivo <strong>package.json</strong> de tu proyecto, modifica los scripts <code>start</code>, <code>build</code> y <code>test</code> de modo que contengan los siguientes comandos:</p>
 <pre><code>&#34;scripts&#34;: {
     &#34;start&#34;: &#34;craco start&#34;,
     &#34;build&#34;: &#34;craco build&#34;,
@@ -70,7 +75,7 @@
   },
 </code></pre>
 <h2 is-upgraded>Archivos de configuración</h2>
-<p>Crea un archivo llamado craco.config.js con el siguiente fragmento de código, donde se especifican los plugins de PostCSS (herramienta que transforma el código CSS utilizando plugins de JavaScript).</p>
+<p>Crea un archivo llamado <strong>craco.config.js</strong> con el fragmento de código mostrado a continuación, donde se especifican los plugins de PostCSS (herramienta que transforma el código CSS utilizando plugins de JavaScript).</p>
 <pre><code>module.exports = {
   style: {
     postcss: {
@@ -85,7 +90,7 @@
 <p>También es necesario crear un archivo de configuración de Tailwind utilizando el comando:</p>
 <pre><code>npx tailwindcss-cli@latest init
 </code></pre>
-<p>Una vez creado, notarás que tiene el nombre de tailwind.config.js. Modifica la opción &#34;purge&#34; de este archivo agregando todas las rutas de los componentes del proyecto para eliminar el código que no se utiliza en producción:</p>
+<p>Una vez creado, notarás que tiene el nombre de <strong>tailwind.config.js</strong>. Modifica la opción &#34;purge&#34; de este archivo agregando todas las rutas de los componentes del proyecto para eliminar el código que no se utiliza en producción:</p>
 <pre><code>module.exports = {
    purge: [&#39;./src/**/*.{js,jsx,ts,tsx}&#39;, &#39;./public/index.html&#39;], //en esta línea
     darkMode: false, // or &#39;media&#39; or &#39;class&#39;
@@ -98,6 +103,8 @@
     plugins: [],
   }
 </code></pre>
+<aside class="special"><p>Lo realizado anteriormente resulta de gran utilidad para optimizar el rendimiento de las aplicaciones. </p>
+</aside>
 <h2 is-upgraded>Incluir estilos en CSS</h2>
 <p>Para poder utilizar las clases de Tailwind en el archivo .css se debe colocar @tailwind seguido de los estilos que nos brinda esta herramienta, tal y como se muestra a continuación:</p>
 <pre><code>@tailwind base;
@@ -105,7 +112,7 @@
 @tailwind utilities;
 </code></pre>
 <h2 is-upgraded>¡Y listo!</h2>
-<p>Ya tienes configurado el entorno para utilizar Tailwind dentro de tu aplicación de React. Continuemos a la siguiente sección💯.</p>
+<p>Ya tienes configurado el entorno para utilizar Tailwind dentro de tu aplicación de React. Continuemos a la siguiente sección✅.</p>
 
 
       </google-codelab-step>
@@ -130,12 +137,12 @@
       </google-codelab-step>
     
       <google-codelab-step label="Ejemplos prácticos" duration="3">
-        <aside class="special"><p>Si dejaste la instalación para después, también puedes practicar en  <a href="https://play.tailwindcss.com/" target="_blank">Tailwind playground</a></p>
+        <aside class="special"><p>Si dejaste la instalación para después, también puedes practicar en  <a href="https://play.tailwindcss.com/" target="_blank">Tailwind playground</a>. </p>
 </aside>
 <h2 is-upgraded>Aclaraciones</h2>
 <ul>
 <li>Antes de empezar, te recomendamos instalar la extensión <a href="https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss" target="_blank">Tailwind CSS IntelliSense</a> para Visual Studio Code, ya que brinda sugerencias, autocomplementa las clases y muestra información sobre la verdadera propiedad CSS que se le aplica al elemento.</li>
-<li>También asegúrate de borrar el fragmento de código JSX que se encuentra dentro del div con clase &#34;App&#34; en App.js, ya que no lo utilizaremos. Quedaría de la siguiente manera:</li>
+<li>También asegúrate de borrar el fragmento de código JSX que se encuentra dentro del div con clase &#34;App&#34; en App.js, ya que no lo utilizaremos. Quedando de la siguiente manera:</li>
 </ul>
 <pre><code>function App() {
   return (
@@ -147,7 +154,7 @@
 
 export default App;
 </code></pre>
-<p>Ahora sí, comencemos ✅</p>
+<p>Ahora sí, comencemos✅</p>
 
 
       </google-codelab-step>
@@ -156,7 +163,7 @@ export default App;
         <p class="image-container"><img alt="Hover Me Button" src="img\\43ac884ec5f23ee4.gif"></p>
 <p>¿Tienes alguna idea de cómo lograrlo utilizando CSS?</p>
 <p>Piénsalo un poco y veamos cómo hacerlo utilizando Tailwind👀, sigue los pasos para que puedas observar cada cambio en tu navegador.</p>
-<aside class="warning"><p>Recuerda ejecutar el comando `npm start` para compilar e iniciar la aplicación.</p>
+<aside class="warning"><p>Recuerda ejecutar el comando <strong>npm start</strong> para compilar e iniciar la aplicación.</p>
 </aside>
 <h2 is-upgraded>Creación del botón</h2>
 <p>Añade el elemento button al componente App.</p>
@@ -169,7 +176,7 @@ export default App;
 }
 </code></pre>
 <h2 is-upgraded>Posicionamiento</h2>
-<p>Para que el botón se muestre al centro, haremos uso del posicionamiento con flex en el contenedor principal App.</p>
+<p>Para que el botón se muestre al centro, haremos uso del posicionamiento con flex en el contenedor principal clase App.</p>
 <p>En CSS se vería de la siguiente manera:</p>
 <pre><code>div.App {
   width: 100vw;
@@ -212,11 +219,12 @@ button:hover {
   );
 }
 </code></pre>
-<aside class="special"><p>Si quieres utilizar otros colores, puedes encontrarlos en el siguiente  <a href="https://tailwindcss.com/docs/background-color" target="_blank">enlace</a>.  En secciones posteriores aprenderás cómo utilizar colores personalizados🎨. </p>
+<p>Como puedes notar, se podría decir que las clases de Tailwind son algún tipo de abreviatura de las propiedades originales de CSS.</p>
+<aside class="special"><p>Si quieres utilizar otros colores para el botón, puedes encontrarlos en el siguiente  <a href="https://tailwindcss.com/docs/background-color" target="_blank">enlace</a>.  En secciones posteriores aprenderás cómo utilizar colores personalizados🎨. </p>
 </aside>
 <p>📌 Es importante mencionar que los valores colocados en las clases py-2 y px-6 corresponden a medidas predefinidas. Estas pueden estar en rem o en px en su mayoría, a excepción de algunas donde se utilizan unidades porcentuales, vw y vh (width y height).</p>
 <p>✨ Para mejor comprensión, visita la <a href="https://tailwindcss.com/docs/padding" target="_blank">documentación oficial de Tailwind</a>.</p>
-<h2 is-upgraded>Resumen de sección</h2>
+<h2 is-upgraded>Resumen de sección<br><br></h2>
 <table>
 <tr><td colspan="1" rowspan="1"><p><strong>CSS</strong></p>
 </td><td colspan="1" rowspan="1"><p><strong>Tailwind</strong></p>
@@ -303,7 +311,7 @@ button:hover {
     &lt;/section&gt;
 </code></pre>
 <p>Para visualizar de mejor manera el posicionamiento, puedes agregar las que creas necesarias por el momento.</p>
-<p>📌 Recuerda que debes importar las imágenes en las primeras líneas del código, como se muestra a continuación (las rutas varían dependiendo de la estructura de tu proyecto):</p>
+<p>🔴 Recuerda que debes importar las imágenes en las primeras líneas del código, como se muestra a continuación (las rutas varían dependiendo de la estructura de tu proyecto):</p>
 <pre><code>import cats from &#39;./assets/img/cats.png&#39;;
 import garden from &#39;./assets/img/garden.png&#39;;
 </code></pre>
@@ -324,7 +332,7 @@ import garden from &#39;./assets/img/garden.png&#39;;
 <p>Para esto, el contenedor de las tarjetas debería tener las siguientes clases:</p>
 <pre><code>&lt;section className=&#34;grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10&#34;&gt;
 </code></pre>
-<p>O en otras palabras (verifica en la tabla):</p>
+<p>Explicándolo un poco (verifica en la tabla):</p>
 <ul>
 <li><code>grid-cols-1</code> se aplicará en resoluciones menores a 768px (md).</li>
 <li><code>md:grid-cols-2</code> se aplicará en resoluciones mayores o iguales a 768px (md) y menores a 1024px (lg).</li>
@@ -333,7 +341,7 @@ import garden from &#39;./assets/img/garden.png&#39;;
 <p>📌 La propiedad <code>gap-{valor}</code> se utiliza para dar espaciado entre los elementos del grid.</p>
 <p>Si agregaste más de una tarjeta, verifica en la opción inspeccionar del navegador que estas se adaptan a medida se cambia la resolución.</p>
 <h2 is-upgraded>Estilo de tarjetas</h2>
-<p>Ahora que ya tenemos listo nuestro contenedor, le daremos estilo a las tarjetas. En este caso, como todas son iguales, a excepción de los colores e imágenes, se le puede aplicar solamente a una de ellas y luego copiar el mismo código para las demás.</p>
+<p>Ahora que ya tenemos listo nuestro contenedor, le daremos estilo a las tarjetas. En este caso, como todas son iguales, a excepción de los colores e imágenes, se le puede aplicar solamente a una de ellas y luego copiar el mismo código para las demás, cambiando lo necesario.</p>
 <p>Retomemos el diseño y el código utilizado para una tarjeta:</p>
 <p class="image-container"><img alt="Responsive cards" src="img\\c56bf60214c66dea.png"></p>
 <pre><code>    &lt;article&gt;
@@ -365,44 +373,96 @@ import garden from &#39;./assets/img/garden.png&#39;;
       &lt;/div&gt;
     &lt;/article&gt;
 </code></pre>
-<p>📌 <code>flex-col</code> se utiliza para especificar que la dirección del contenedor flex será en forma de columna (propiedad de CSS <code>flex-direction: column;</code>).<br> 📌 <code>shadow-xl</code> se utilizó para que la tarjeta tuviera cierto efecto de sombra. También se pueden utilizar los tamaños sm, md, lg, entre otros.<br> 📌 La clase <code>leading-{valor}</code> se utiliza para dar interlineado en textos.<br> 📌 Como última aclaración, para el botón se utilizó <code>w-1/3</code> (0.33333% del ancho) para dispositivos menores a 768px y <code>w-1/4</code> (0.25% del ancho) para los de 768px en adelante. Esta es la forma de colocar unidades porcentuales.</p>
+<p>📌 <code>flex-col</code> se utiliza para especificar que la dirección del contenedor flex será en forma de columna (propiedad de CSS <code>flex-direction: column;</code>).</p>
+<p>📌 <code>shadow-xl</code> se utilizó para que la tarjeta tuviera cierto efecto de sombra. También se pueden utilizar los tamaños sm, md, lg, entre otros.</p>
+<p>📌 La clase <code>leading-{valor}</code> se utiliza para dar interlineado en textos.</p>
+<p>📌 Como última aclaración, para el botón se utilizó <code>w-1/3</code> (0.33333% del ancho) para dispositivos menores a 768px y <code>w-1/4</code> (0.25% del ancho) para los de 768px en adelante. Esta es la forma de colocar unidades porcentuales.</p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="Personalización de clases" duration="10">
-        <p>En la documentación de Tailwind se presentan diversas maneras de personalizar <a href="https://tailwindcss.com/docs/customizing-colors" target="_blank">colores</a>, <a href="https://tailwindcss.com/docs/customizing-spacing" target="_blank">espaciado y tamaño</a>, <a href="https://tailwindcss.com/docs/breakpoints" target="_blank">breakpoints</a> e incluso <a href="https://tailwindcss.com/docs/font-family#customizing" target="_blank">fuentes</a>. Te invito a revisar cada apartado e incluso los demás que se muestran para que tengas una idea de todas las ventajas de Tailwind.</p>
-<p>Generalmente, cuando se desean crear nuevas clases o cambiar los valores de las ya definidas, se realiza en el apartado <code>theme</code> dentro del archivo <strong>tailwind.config.js</strong>.</p>
-<p>Existen dos maneras de hacerlo: ✅ ✅</p>
+        <p>En la documentación de Tailwind se presentan diversas maneras de personalizar <a href="https://tailwindcss.com/docs/customizing-colors" target="_blank">colores</a>, <a href="https://tailwindcss.com/docs/customizing-spacing" target="_blank">espaciado y tamaño</a>, <a href="https://tailwindcss.com/docs/breakpoints" target="_blank">breakpoints</a> e incluso <a href="https://tailwindcss.com/docs/font-family#customizing" target="_blank">fuentes</a>. Te invito a revisar cada apartado e incluso los demás que se muestran para que tengas una idea de todas las ventajas que Tailwind posee.</p>
+<p>Generalmente, cuando se desean cambiar los valores de las clases ya definidas por Tailwind o bien, cuando es necesario crear nuevas clases, se realiza en la opción <code>theme</code> dentro del archivo <strong>tailwind.config.js</strong>. Observa el siguiente ejemplo:</p>
 <pre><code>module.exports = {
-  purge: [&#39;./src/**/*.{js,jsx,ts,tsx}&#39;, &#39;./public/index.html&#39;],
-  darkMode: false, // or &#39;media&#39; or &#39;class&#39;
   theme: {
-    //Aquí se cambian valores predefinidos por Tailwind
-    extend: {
-      //Aquí se agregan clases personalizadas
+    screens: {
+      md: &#39;760px&#39;,
     },
-  },
-  variants: {
-    extend: {},
-  },
-  plugins: [],
+    colors: {
+      black: &#39;#000&#39;,
+    },
+    fontFamily: {
+      sans: [&#39;Graphik&#39;, &#39;sans-serif&#39;],
+    },
+
+    extend: {
+      spacing: {
+        &#39;15&#39;: &#39;3.75rem&#39;,
+      },
+      borderRadius: {
+        &#39;4xl&#39;: &#39;2rem&#39;,
+      }
+      screens: {
+        &#39;3xl&#39;: &#39;1700px&#39;,
+      },
+    }
+  }
 }
-
-De 
-
 </code></pre>
-<h2 is-upgraded>Nuevas clases</h2>
-<p>📌 Recuerda que estas deben colocarse dentro de <code>extend</code>, ya que se tratan de estilos adicionales.</p>
-<h3 is-upgraded>Agrega tu color favorito</h3>
+<p>📌 Tenemos las siguientes claves: <code>screens</code>, <code>colors</code>, <code>fontFamily</code>, <code>spacing</code> y <code>borderRadius</code>. Dentro de ellas se colocan las clases y valores específicos que se desean modificar o incorporar a la aplicación.</p>
+<p>📌 También habrás notado que hay algunas claves que se han colocado dentro de <code>extend</code>. ¿Qué significa esto? Se puede resumir en los comentarios del siguiente fragmento de código:</p>
+<pre><code>module.exports = {
+  theme: {
+    //Aquí se cambian los valores de las clases predefinidas por Tailwind.
+
+    extend: {
+      //Aquí se crean nuevas clases y se asignan los valores respectivos.
+    }
+  }
+}
+</code></pre>
+<h2 is-upgraded>Ejercicios breves</h2>
+<aside class="special"><p> Recuerda que las nuevas clases deben colocarse dentro de <strong>extend</strong>, ya que se tratan de estilos adicionales.   </p>
+</aside>
+<h3 is-upgraded>1️⃣ Agrega tu color favorito</h3>
 <pre><code>theme: {
     extend: {
       colors: {
-        
+        &#39;fav-color&#39;: &#39;#bddcff&#39;,
       }
     },
   },
 </code></pre>
+<p>Ahora ya puedes utilizarlo en tu aplicación, por ejemplo con la clase <code>bg-fav-color</code>.</p>
+<h3 is-upgraded>2️⃣ Agrega una variante a un color predefinido</h3>
+<p>Puedes encontrarlos en este <a href="https://tailwindcss.com/docs/customizing-colors#custom-colors" target="_blank">enlace</a>.</p>
+<pre><code>theme: {
+    extend: {
+      indigo: {
+          250: &#39;#c2ceff&#39;,
+        }
+    },
+  },
+</code></pre>
+<p>Esta podría ser utilizada como <code>bg-indigo-250</code>.</p>
+<h3 is-upgraded>3️⃣ Modifica un breakpoint predefinido</h3>
+<pre><code>theme: {
+    screens: {
+        md: &#39;775px&#39;, // El predefinido es 768px
+    }
+},
+</code></pre>
+<aside class="special"><p>Para más ejemplos y posibilidades, visita la sección de <a href="https://tailwindcss.com/docs/theme" target="_blank">personalización de theme</a> en la documentación de Tailwind. </p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="¡Completaste el Codelab!" duration="1">
+        <p class="image-container"><img alt="Confetti" src="img\\4a594c6a1aad3b77.gif"></p>
+<h2 is-upgraded>Has finalizado el Codelab sobre Tailwind CSS, esperamos te haya sido de mucha ayuda.</h2>
+<h2 is-upgraded>¡Continúa practicando!⭐</h2>
 
 
       </google-codelab-step>
@@ -414,6 +474,6 @@ De
   <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
   <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
   <script src="//support.google.com/inapp/api.js"></script>
-
+  <script src="js/script.js"></script>
 </body>
 </html>
